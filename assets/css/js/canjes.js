@@ -2,14 +2,13 @@
 
 // Config de clubes (ejemplo). Ajusta id_club y dias_canje con tus datos reales.
 const CLUBES_CONVENIOS = {
-  "ARM-CC": { nombre_club: "Armenia: Club Campestre", ciudad: "Armenia", dias_canje: 15 },
-  "BQA-CC": { nombre_club: "Barranquilla: Country Club", ciudad: "Barranquilla", dias_canje: 10 },
-  "BGT-ARRAY": { nombre_club: "Bogotá: Arrayanes", ciudad: "Bogotá", dias_canje: 7 },
-  "BGT-CC": { nombre_club: "Bogotá: Country Club", ciudad: "Bogotá", dias_canje: 7 },
-  "MDL-CC": { nombre_club: "Medellín: Club Campestre", ciudad: "Medellín", dias_canje: 10 },
-  "PNA-GOLF": { nombre_club: "Panamá: Club de Golf", ciudad: "Panamá", dias_canje: 7 },
+  "ARM-CC":        { nombre_club: "Armenia: Club Campestre", ciudad: "Armenia", dias_canje: 15 },
+  "BQA-CC":        { nombre_club: "Barranquilla: Country Club", ciudad: "Barranquilla", dias_canje: 10 },
+  "BGT-ARRAY":     { nombre_club: "Bogotá: Arrayanes", ciudad: "Bogotá", dias_canje: 7 },
+  "BGT-CC":        { nombre_club: "Bogotá: Country Club", ciudad: "Bogotá", dias_canje: 7 },
+  "MDL-CC":        { nombre_club: "Medellín: Club Campestre", ciudad: "Medellín", dias_canje: 10 },
+  "PNA-GOLF":      { nombre_club: "Panamá: Club de Golf", ciudad: "Panamá", dias_canje: 7 },
   "SANT-RUITOQUE": { nombre_club: "Santander: Ruitoque", ciudad: "Santander", dias_canje: 10 }
-  // agrega todos los que necesites...
 };
 
 const formValidaClub = document.getElementById("formValidaClub");
@@ -23,13 +22,17 @@ const infoPeriodo = document.getElementById("infoPeriodo");
 
 let clubSeleccionado = null;
 
+// Validación de ID de club
 formValidaClub?.addEventListener("submit", (e) => {
   e.preventDefault();
-  const idClub = new FormData(formValidaClub).get("id_club").toString().trim().toUpperCase();
+  const raw = new FormData(formValidaClub).get("id_club");
+  const idClub = (raw || "").toString().trim().toUpperCase();
+
+  console.log("ID de club ingresado:", raw, "→ normalizado:", idClub);
 
   const club = CLUBES_CONVENIOS[idClub];
   if (!club) {
-    statusClub.textContent = "ID de club no reconocido. Verifica el código.";
+    statusClub.textContent = "ID de club no reconocido. Prueba con: ARM-CC, BQA-CC, BGT-ARRAY, BGT-CC, MDL-CC, PNA-GOLF, SANT-RUITOQUE.";
     statusClub.classList.add("error");
     sectionCanje.style.display = "none";
     clubSeleccionado = null;
@@ -44,10 +47,13 @@ formValidaClub?.addEventListener("submit", (e) => {
   sectionCanje.style.display = "block";
 
   // sugerir ciudad del club en el formulario
-  formCanje.elements["ciudad_club"].value = club.ciudad;
+  if (formCanje?.elements["ciudad_club"]) {
+    formCanje.elements["ciudad_club"].value = club.ciudad;
+  }
 });
 
-formCanje?.elements["fecha_inicio_canje"].addEventListener("change", (e) => {
+// Cálculo de periodo de canje
+formCanje?.elements["fecha_inicio_canje"]?.addEventListener("change", (e) => {
   if (!clubSeleccionado) return;
   const dias = clubSeleccionado.dias_canje;
   const inicioStr = e.target.value;
@@ -62,10 +68,15 @@ formCanje?.elements["fecha_inicio_canje"].addEventListener("change", (e) => {
   const yyyy = fin.getFullYear();
   const mm = String(fin.getMonth() + 1).padStart(2, "0");
   const dd = String(fin.getDate()).padStart(2, "0");
-  formCanje.elements["fecha_fin_canje"].value = `${yyyy}-${mm}-${dd}`;
-  infoPeriodo.textContent = `Período de canje: ${dias} día(s). Fin automático: ${dd}/${mm}/${yyyy}.`;
+  if (formCanje?.elements["fecha_fin_canje"]) {
+    formCanje.elements["fecha_fin_canje"].value = `${yyyy}-${mm}-${dd}`;
+  }
+  if (infoPeriodo) {
+    infoPeriodo.textContent = `Período de canje: ${dias} día(s). Fin automático: ${dd}/${mm}/${yyyy}.`;
+  }
 });
 
+// Envío del formulario de canje
 formCanje?.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!clubSeleccionado) {
@@ -103,14 +114,17 @@ formCanje?.addEventListener("submit", async (e) => {
   statusCanje.classList.remove("ok","error");
 
   try {
-    await apiInsert("canjes", data);
+    const res = await apiInsert("canjes", data);
+    console.log("Insert canjes OK:", res);
     statusCanje.textContent = "Canje registrado correctamente.";
     statusCanje.classList.add("ok");
     formCanje.reset();
-    infoPeriodo.textContent = "El sistema calculará el período según el convenio del club.";
+    if (infoPeriodo) {
+      infoPeriodo.textContent = "El sistema calculará el período según el convenio del club.";
+    }
   } catch (err) {
-    console.error(err);
-    statusCanje.textContent = "Error al guardar el canje. Intenta de nuevo o consulta a Sistemas.";
+    console.error("Error al guardar canje:", err);
+    statusCanje.textContent = "Error al guardar el canje: " + (err.message || "revisa la consola (F12).");
     statusCanje.classList.add("error");
   }
 });
