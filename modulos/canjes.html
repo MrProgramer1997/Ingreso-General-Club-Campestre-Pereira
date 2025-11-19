@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Módulo 2 · Canjes entre clubes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="app-body">
+  <header class="hero" style="height:200px;">
+    <div class="hero-overlay"></div>
+    <img src="../assets/img/portada-club.jpg" class="hero-img" alt="">
+    <div class="hero-content">
+      <h1>Canjes entre clubes</h1>
+      <p>Registro de socios visitantes mediante canje. Módulo protegido por ID de club.</p>
+    </div>
+  </header>
+
+  <main class="main-section">
+    <a href="../index.html" class="btn ghost" style="margin-bottom:1rem;">← Volver al inicio</a>
+
+    <section class="form-shell">
+      <div class="form-header">
+        <div class="form-header-badge">🤝</div>
+        <div>
+          <h1>Validación de club emisor</h1>
+          <p>Ingresa el ID interno del club para activar el formulario de canje.</p>
+        </div>
+      </div>
+
+      <form id="formValidaClub">
+        <div class="form-grid">
+          <div class="field">
+            <label>ID del club emisor *</label>
+            <input type="text" name="id_club" required autocomplete="off" placeholder="Ej: ARM-CC">
+            <small>Solicitud exclusiva para personal autorizado.</small>
+          </div>
+        </div>
+        <div class="helper-row">
+          <div class="status" id="statusClub">Esperando ID…</div>
+          <button type="submit" class="btn secondary">Validar club</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="form-shell" id="sectionCanje" style="display:none;">
+      <div class="form-header">
+        <div class="form-header-badge">📋</div>
+        <div>
+          <h1>Registro de Canje</h1>
+          <p>
+            <span class="tag" id="tagClub"></span>
+          </p>
+        </div>
+      </div>
+
+      <form id="formCanje" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label>País del club emisor *</label>
+            <input type="text" name="pais_club" required>
+          </div>
+          <div class="field">
+            <label>Ciudad del club emisor *</label>
+            <input type="text" name="ciudad_club" required>
+          </div>
+          <div class="field">
+            <label>N.º de acción del socio visitante *</label>
+            <input type="text" name="numero_accion" required>
+          </div>
+          <div class="field">
+            <label>Nombres y apellidos del socio titular *</label>
+            <input type="text" name="nombres_titular" required>
+          </div>
+          <div class="field">
+            <label>Tipo de documento *</label>
+            <select name="tipo_documento" required>
+              <option value="">Seleccione…</option>
+              <option>CC</option>
+              <option>CE</option>
+              <option>Pasaporte</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Número de identificación *</label>
+            <input type="text" name="numero_documento" required>
+          </div>
+          <div class="field">
+            <label>Número celular *</label>
+            <input type="tel" name="celular" required>
+          </div>
+          <div class="field">
+            <label>¿Vienen beneficiarios del titular? *</label>
+            <select name="vienen_beneficiarios" required>
+              <option value="">Seleccione…</option>
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Declaramos que el grupo familiar reside en la misma ciudad del club emisor *</label>
+            <select name="grupo_reside_misma_ciudad" required>
+              <option value="">Seleccione…</option>
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+
+          <!-- Datos de quien diligencia -->
+          <div class="field">
+            <label>Nombre de quien diligencia *</label>
+            <input type="text" name="info_diligencia_nombre" required>
+          </div>
+          <div class="field">
+            <label>Cargo que desempeña *</label>
+            <input type="text" name="info_diligencia_cargo" required>
+          </div>
+          <div class="field">
+            <label>Número de contacto *</label>
+            <input type="tel" name="info_diligencia_contacto" required>
+          </div>
+          <div class="field">
+            <label>Correo electrónico *</label>
+            <input type="email" name="info_diligencia_correo" required>
+          </div>
+
+          <!-- Periodo de canje -->
+          <div class="field">
+            <label>Fecha inicio canje *</label>
+            <input type="date" name="fecha_inicio_canje" required>
+          </div>
+          <div class="field">
+            <label>Fecha fin canje (auto)</label>
+            <input type="date" name="fecha_fin_canje" readonly>
+            <small id="infoPeriodo">El sistema calculará el período según el convenio del club.</small>
+          </div>
+        </div>
+
+        <div class="helper-row">
+          <div class="status" id="statusCanje">Completa los datos para guardar.</div>
+          <button type="submit" class="btn primary">Guardar canje</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Módulo 2 · Canjes entre clubes</span>
+  </footer>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/canjes.js"></script>
+</body>
+</html>

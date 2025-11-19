@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Módulo 1 · Invitados externos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="app-body">
+  <header class="hero" style="height:200px;">
+    <div class="hero-overlay"></div>
+    <img src="../assets/img/portada-club.jpg" class="hero-img" alt="">
+    <div class="hero-content">
+      <h1>Invitados que no residen en Pereira</h1>
+      <p>Registro para control en portería. Datos básicos y cálculo automático de edad.</p>
+    </div>
+  </header>
+
+  <main class="main-section">
+    <a href="../index.html" class="btn ghost" style="margin-bottom:1rem;">← Volver al inicio</a>
+
+    <section class="form-shell">
+      <div class="form-header">
+        <div class="form-header-badge">👤</div>
+        <div>
+          <h1>Registro de Invitado Externo</h1>
+          <p>Todos los campos marcados con * son obligatorios.</p>
+        </div>
+      </div>
+
+      <form id="formInvitado" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label>Nombres *</label>
+            <input type="text" name="nombres" required autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Apellidos *</label>
+            <input type="text" name="apellidos" required autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Tipo de documento *</label>
+            <select name="tipo_documento" required>
+              <option value="">Seleccione…</option>
+              <option>CC</option>
+              <option>CE</option>
+              <option>Pasaporte</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Cédula / N. documento *</label>
+            <input type="text" name="numero_documento" required inputmode="numeric">
+          </div>
+          <div class="field">
+            <label>Ciudad de residencia *</label>
+            <input type="text" name="ciudad_residencia" required>
+          </div>
+          <div class="field">
+            <label>Dirección *</label>
+            <input type="text" name="direccion" required>
+          </div>
+          <div class="field">
+            <label>Fecha de nacimiento *</label>
+            <input type="date" name="fecha_nacimiento" required>
+          </div>
+          <div class="field">
+            <label>Edad (auto) *</label>
+            <input type="number" name="edad" readonly>
+            <small>Se calcula automáticamente con la fecha de nacimiento.</small>
+          </div>
+          <div class="field">
+            <label>Celular *</label>
+            <input type="tel" name="celular" required>
+          </div>
+          <div class="field">
+            <label>Correo electrónico *</label>
+            <input type="email" name="correo" required>
+          </div>
+        </div>
+
+        <div class="helper-row">
+          <div class="status" id="statusInvitado">Listo para registrar.</div>
+          <button type="submit" class="btn primary">Guardar invitado</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Módulo 1 · Invitados externos</span>
+  </footer>
+
+  <script src="../assets/js/common.js"></script>
+  <script src="../assets/js/invitados.js"></script>
+</body>
+</html>

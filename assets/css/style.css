@@ -1,0 +1,299 @@
+:root {
+  --bg: #050608;
+  --bg-soft: #11141b;
+  --card: #181b25;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56,189,248,0.15);
+  --text: #f9fafb;
+  --muted: #9ca3af;
+  --danger: #f97373;
+  --success: #22c55e;
+  --border: #1f2933;
+  --radius-lg: 18px;
+  --shadow-soft: 0 18px 50px rgba(0,0,0,0.5);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body.app-body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1f2933 0, #050608 55%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* HERO / PORTADA */
+.hero {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  border-radius: 0 0 32px 32px;
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.45);
+  transform: scale(1.03);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(56,189,248,0.35), transparent 55%);
+}
+
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem min(8vw,4rem);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 3.1vw, 2.7rem);
+  margin: 0 0 .5rem;
+}
+
+.hero p {
+  max-width: 540px;
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+/* BOTONES */
+.btn {
+  padding: .7rem 1.3rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: .95rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  transition: all .18s ease-out;
+}
+
+.btn.primary {
+  background: linear-gradient(130deg, var(--accent), #6366f1);
+  box-shadow: 0 12px 30px rgba(56,189,248,0.4);
+}
+
+.btn.secondary {
+  background: rgba(15,23,42,0.9);
+  border-color: rgba(148,163,184,0.4);
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: rgba(148,163,184,0.25);
+  color: var(--muted);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.5);
+  filter: brightness(1.05);
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-section {
+  padding: 2.2rem min(8vw,4rem) 2.8rem;
+}
+
+.grid-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+  gap: 1.5rem;
+}
+
+.info-card {
+  background: linear-gradient(145deg, rgba(15,23,42,0.98), rgba(15,23,42,0.75));
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(148,163,184,0.22);
+  padding: 1.4rem 1.3rem 1.5rem;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .6rem;
+  font-size: 1.4rem;
+  animation: bob 3s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.info-card h2 {
+  margin: 0 0 .3rem;
+  font-size: 1.1rem;
+}
+
+.info-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* FORMULARIOS GENERALES */
+.form-shell {
+  max-width: 880px;
+  margin: 1.8rem auto 2.5rem;
+  background: rgba(15,23,42,0.96);
+  border-radius: 26px;
+  border: 1px solid rgba(148,163,184,0.32);
+  box-shadow: var(--shadow-soft);
+  padding: 1.8rem 1.6rem 2rem;
+}
+
+.form-header {
+  display: flex;
+  gap: .9rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.form-header-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.form-header h1 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.form-header p {
+  margin: .15rem 0 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 1rem 1.2rem;
+  margin-top: .5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+.field label {
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.field input,
+.field select {
+  padding: .55rem .7rem;
+  border-radius: 11px;
+  border: 1px solid var(--border);
+  background: rgba(15,23,42,0.9);
+  color: var(--text);
+  font-size: .9rem;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 1px solid var(--accent);
+  border-color: var(--accent);
+}
+
+.field small {
+  font-size: .78rem;
+  color: var(--muted);
+}
+
+.tag {
+  display: inline-flex;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  background: rgba(15,23,42,0.9);
+  border: 1px solid rgba(148,163,184,0.4);
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+.helper-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.status {
+  font-size: .83rem;
+  color: var(--muted);
+}
+
+.status.ok {
+  color: var(--success);
+}
+
+.status.error {
+  color: var(--danger);
+}
+
+/* FOOTER */
+.footer {
+  padding: 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: .8rem;
+  border-top: 1px solid rgba(15,23,42,0.9);
+  margin-top: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .hero {
+    height: 280px;
+    border-radius: 0 0 24px 24px;
+  }
+  .hero-content {
+    padding-inline: 1.3rem;
+  }
+  .form-shell {
+    margin-inline: 1rem;
+    padding-inline: 1.2rem;
+  }
+}
