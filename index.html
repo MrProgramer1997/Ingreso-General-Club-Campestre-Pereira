@@ -2,49 +2,110 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro de Ingreso – Club Campestre</title>
+  <title>Registro de Ingresos · Club Campestre</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="app-body">
+
+  <!-- HERO SUPERIOR -->
   <header class="hero">
+    <div class="hero-img"></div>
     <div class="hero-overlay"></div>
-    <img src="assets/img/portada-club.jpg" alt="Club Campestre" class="hero-img">
+
     <div class="hero-content">
-      <h1>Registro de Ingreso</h1>
-      <p>Sistema unificado para registro de visitantes, canjes y panel administrativo.</p>
-      <div class="hero-actions">
-        <a href="modulos/invitados.html" class="btn primary">Invitados externos</a>
-        <a href="modulos/canjes.html" class="btn secondary">Canjes</a>
-        <a href="admin/index.html" class="btn ghost">Panel Admin</a>
+      <p class="hero-kicker">Club Campestre de Pereira</p>
+      <h1>Registro de ingresos y canjes</h1>
+      <p>
+        Sistema unificado para registrar invitados externos, canjes entre clubes
+        y consultar la información desde el panel administrativo.
+      </p>
+
+      <div class="hero-badges">
+        <span class="hero-pill">🎯 Portería</span>
+        <span class="hero-pill">🧾 Canjes</span>
+        <span class="hero-pill">🛠️ Sistemas</span>
       </div>
     </div>
   </header>
 
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="main-section">
+
+    <!-- TARJETAS DE MÓDULOS (MENÚ PRINCIPAL) -->
     <section class="grid-info">
-      <article class="info-card">
+
+      <!-- Invitados externos -->
+      <a class="info-card" href="modulos/invitados.html">
         <div class="icon-circle">👤</div>
         <h2>Invitados externos</h2>
-        <p>Registro de invitados que no residen en Pereira, con cálculo automático de edad y validaciones básicas.</p>
-      </article>
+        <p>
+          Registro de invitados que no residen en Pereira, con cálculo automático de edad y
+          validaciones básicas para portería.
+        </p>
+        <span class="card-cta">Ir al módulo de invitados →</span>
+      </a>
 
-      <article class="info-card">
+      <!-- Canjes -->
+      <a class="info-card" href="modulos/canjes.html">
         <div class="icon-circle">🤝</div>
         <h2>Canjes entre clubes</h2>
-        <p>Ingreso controlado por ID de club, períodos de canje automáticos según convenio y datos del socio visitante.</p>
-      </article>
+        <p>
+          Ingreso controlado mediante ID de club, períodos de canje automáticos según convenio
+          y datos completos del socio visitante.
+        </p>
+        <span class="card-cta">Ir al módulo de canjes →</span>
+      </a>
 
-      <article class="info-card">
+      <!-- Panel admin -->
+      <a class="info-card" href="admin.html">
         <div class="icon-circle">📊</div>
         <h2>Panel administrativo</h2>
-        <p>Consulta por categorías y descarga en Excel para el área de Sistemas del Club Campestre.</p>
-      </article>
+        <p>
+          Consulta de registros por categoría y descarga en Excel para el área de Sistemas del
+          Club Campestre.
+        </p>
+        <span class="card-cta">Abrir panel administrativo →</span>
+      </a>
+
+    </section>
+
+    <!-- CONTACTO RÁPIDO (WHATSAPP) -->
+    <section class="support-actions">
+      <h2>Contacto rápido</h2>
+      <p>Si tienes alguna duda con los registros, comunícate directamente:</p>
+
+      <div class="support-actions-buttons">
+        <a
+          href="https://wa.me/573142142234?text=Hola%2C%20tengo%20una%20consulta%20sobre%20el%20registro%20de%20ingresos."
+          target="_blank"
+          class="btn whatsapp"
+        >
+          📞 Recepción
+        </a>
+
+        <a
+          href="https://wa.me/573128648786?text=Hola%2C%20tengo%20una%20consulta%20sobre%20el%20registro%20de%20ingresos."
+          target="_blank"
+          class="btn whatsapp secondary"
+        >
+          📝 Asistente de Gerencia
+        </a>
+
+        <a
+          href="https://wa.me/573116417267?text=Hola%2C%20tengo%20una%20consulta%20sobre%20el%20registro%20de%20ingresos."
+          target="_blank"
+          class="btn whatsapp secondary"
+        >
+          👮‍♀️ Porteria
+        </a>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
-    <span>© 2025 Club Campestre de Pereira · Sistema de Registro de Ingreso</span>
+    <span>Registro de ingresos · Club Campestre de Pereira</span>
   </footer>
+
 </body>
 </html>
