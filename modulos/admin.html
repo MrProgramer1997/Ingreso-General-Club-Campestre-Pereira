@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel Administrativo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../assets/css/style.css?v=7" />
+</head>
+
+<body class="app-body">
+
+  <header class="hero small-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Panel administrativo</h1>
+      <p>Consulta y exportación de información del sistema de ingresos.</p>
+    </div>
+  </header>
+
+  <main class="main-section">
+
+    <!-- LOGIN -->
+    <section id="loginSection" class="form-shell" style="max-width:500px;">
+      <h2>Acceso restringido</h2>
+      <p>Solo personal autorizado de Sistemas.</p>
+
+      <div class="field">
+        <label>Contraseña *</label>
+        <input type="password" id="adminPass" placeholder="Ingrese la contraseña" />
+      </div>
+
+      <button id="btnLogin" class="btn primary" style="width:100%;">Ingresar</button>
+
+      <div id="loginStatus" class="status"></div>
+    </section>
+
+    <!-- CONTENIDO DEL ADMIN -->
+    <section id="adminContent" style="display:none;">
+
+      <h2 class="sub-title">Descargas rápidas</h2>
+
+      <div class="admin-grid">
+
+        <div class="admin-card">
+          <h3>Invitados externos</h3>
+          <p>Descargar todos los registros en CSV.</p>
+          <button class="btn secondary" id="btnExportInvitados">Descargar CSV</button>
+        </div>
+
+        <div class="admin-card">
+          <h3>Canjes entre clubes</h3>
+          <p>Descargar todos los registros en CSV.</p>
+          <button class="btn secondary" id="btnExportCanjes">Descargar CSV</button>
+        </div>
+
+        <div class="admin-card">
+          <h3>Convenios con clubes</h3>
+          <p>Activar o desactivar clubes asociados al convenio.</p>
+          <button class="btn accent" id="btnVerClubs">Administrar clubes</button>
+        </div>
+
+      </div>
+
+      <!-- Tabla dinámica de clubes -->
+      <section id="clubManager" style="display:none; margin-top:2rem;">
+        <h2>Gestión de clubes convenio</h2>
+        <p>Habilita o deshabilita convenios directamente desde aquí.</p>
+
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre del club</th>
+              <th>Ciudad</th>
+              <th>Días Canje</th>
+              <th>Activo</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="clubTableBody"></tbody>
+        </table>
+      </section>
+
+    </section>
+  </main>
+
+  <footer class="footer">
+    Panel administrativo – Club Campestre de Pereira
+  </footer>
+
+  <script src="../assets/js/common.js?v=7"></script>
+  <script src="../assets/js/admin.js?v=7"></script>
+</body>
+</html>
