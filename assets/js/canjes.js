@@ -55,28 +55,39 @@ formValidaClub?.addEventListener("submit", (e) => {
   }
 });
 
-// Función que calcula el período y actualiza campos
+// --- Cálculo del período de canje, usando toISOString() ---
 function calcularPeriodo() {
   if (!clubSeleccionado || !formCanje) return;
-  const dias = clubSeleccionado.dias_canje;
+
+  const dias = Number(clubSeleccionado.dias_canje) || 0;
   const inicioStr = formCanje.elements["fecha_inicio_canje"].value;
+
   if (!inicioStr) return;
 
+  // inicioStr de un <input type="date"> SIEMPRE viene como "yyyy-MM-dd"
   const inicio = new Date(inicioStr);
-  if (Number.isNaN(inicio.getTime())) return;
+  if (Number.isNaN(inicio.getTime())) {
+    console.warn("Fecha inicio inválida:", inicioStr);
+    return;
+  }
 
   const fin = new Date(inicio);
   fin.setDate(fin.getDate() + dias - 1);
 
-  const yyyy = fin.getFullYear();
-  const mm = String(fin.getMonth() + 1).padStart(2, "0");
-  const dd = String(fin.getDate()).padStart(2, "0");
+  // Formato seguro para <input type="date">
+  const finISO = fin.toISOString().slice(0, 10); // yyyy-MM-dd
 
-  if (formCanje.elements["fecha_fin_canje"]) {
-    formCanje.elements["fecha_fin_canje"].value = `${yyyy}-${mm}-${dd}`;
+  console.log("Período calculado:", { inicio: inicioStr, dias, finISO });
+
+  const finInput = formCanje.elements["fecha_fin_canje"];
+  if (finInput) {
+    finInput.value = finISO;
   }
+
   if (infoPeriodo) {
-    infoPeriodo.textContent = `Período de canje: ${dias} día(s). Fin automático: ${dd}/${mm}/${yyyy}.`;
+    const [yyyy, mm, dd] = finISO.split("-");
+    infoPeriodo.textContent =
+      `Período de canje: ${dias} día(s). Fin automático: ${dd}/${mm}/${yyyy}.`;
   }
 }
 
@@ -86,7 +97,7 @@ formCanje?.elements["fecha_inicio_canje"]?.addEventListener("change", calcularPe
 // Calcular al pulsar el botón
 btnCalcularPeriodo?.addEventListener("click", calcularPeriodo);
 
-// Envío del formulario de canje
+// --- Envío del formulario de canje ---
 formCanje?.addEventListener("submit", async (e) => {
   e.preventDefault();
   if (!clubSeleccionado) {
