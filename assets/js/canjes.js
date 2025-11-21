@@ -35,7 +35,8 @@ formValidaClub?.addEventListener("submit", (e) => {
 
   const club = CLUBES_CONVENIOS[idClub];
   if (!club) {
-    statusClub.textContent = "ID de club no reconocido. Prueba con: ARM-CC, BQA-CC, BGT-ARRAY, BGT-CC, MDL-CC, PNA-GOLF, SANT-RUITOQUE.";
+    statusClub.textContent =
+      "ID de club no reconocido. Prueba con: ARM-CC, BQA-CC, BGT-ARRAY, BGT-CC, MDL-CC, PNA-GOLF, SANT-RUITOQUE.";
     statusClub.classList.add("error");
     sectionCanje.style.display = "none";
     clubSeleccionado = null;
@@ -129,11 +130,13 @@ formCanje?.addEventListener("submit", async (e) => {
     statusCanje.classList.add("ok");
     formCanje.reset();
     if (infoPeriodo) {
-      infoPeriodo.textContent = "Pulsa “Calcular período” o cambia la fecha de inicio.";
+      infoPeriodo.textContent =
+        "Pulsa “Calcular período” o cambia la fecha de inicio.";
     }
   } catch (err) {
     console.error("Error al guardar canje:", err);
-    statusCanje.textContent = "Error al guardar el canje: " + (err.message || "revisa la consola (F12).");
+    statusCanje.textContent =
+      "Error al guardar el canje: " + (err.message || "revisa la consola (F12).");
     statusCanje.classList.add("error");
   }
 });

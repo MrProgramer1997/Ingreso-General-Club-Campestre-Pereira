@@ -57,7 +57,8 @@ formInvitado?.addEventListener("submit", async (e) => {
     edadInput.value = "";
   } catch (err) {
     console.error("Error al guardar invitado:", err);
-    statusInvitado.textContent = "Error al guardar: " + (err.message || "revisa la consola (F12).");
+    statusInvitado.textContent =
+      "Error al guardar: " + (err.message || "revisa la consola (F12).");
     statusInvitado.classList.add("error");
   }
 });
