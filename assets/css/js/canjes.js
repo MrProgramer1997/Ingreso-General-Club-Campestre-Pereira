@@ -1,5 +1,7 @@
 // assets/js/canjes.js
 
+console.log("canjes.js cargado");
+
 // Config de clubes (ejemplo). Ajusta id_club y dias_canje con tus datos reales.
 const CLUBES_CONVENIOS = {
   "ARM-CC":        { nombre_club: "Armenia: Club Campestre", ciudad: "Armenia", dias_canje: 15 },
@@ -19,6 +21,7 @@ const tagClub = document.getElementById("tagClub");
 const formCanje = document.getElementById("formCanje");
 const statusCanje = document.getElementById("statusCanje");
 const infoPeriodo = document.getElementById("infoPeriodo");
+const btnCalcularPeriodo = document.getElementById("btnCalcularPeriodo");
 
 let clubSeleccionado = null;
 
@@ -46,17 +49,16 @@ formValidaClub?.addEventListener("submit", (e) => {
   tagClub.textContent = `${club.nombre_club} · ${club.ciudad} · ${club.dias_canje} días de canje`;
   sectionCanje.style.display = "block";
 
-  // sugerir ciudad del club en el formulario
   if (formCanje?.elements["ciudad_club"]) {
     formCanje.elements["ciudad_club"].value = club.ciudad;
   }
 });
 
-// Cálculo de periodo de canje
-formCanje?.elements["fecha_inicio_canje"]?.addEventListener("change", (e) => {
-  if (!clubSeleccionado) return;
+// Función que calcula el período y actualiza campos
+function calcularPeriodo() {
+  if (!clubSeleccionado || !formCanje) return;
   const dias = clubSeleccionado.dias_canje;
-  const inicioStr = e.target.value;
+  const inicioStr = formCanje.elements["fecha_inicio_canje"].value;
   if (!inicioStr) return;
 
   const inicio = new Date(inicioStr);
@@ -68,13 +70,20 @@ formCanje?.elements["fecha_inicio_canje"]?.addEventListener("change", (e) => {
   const yyyy = fin.getFullYear();
   const mm = String(fin.getMonth() + 1).padStart(2, "0");
   const dd = String(fin.getDate()).padStart(2, "0");
-  if (formCanje?.elements["fecha_fin_canje"]) {
+
+  if (formCanje.elements["fecha_fin_canje"]) {
     formCanje.elements["fecha_fin_canje"].value = `${yyyy}-${mm}-${dd}`;
   }
   if (infoPeriodo) {
     infoPeriodo.textContent = `Período de canje: ${dias} día(s). Fin automático: ${dd}/${mm}/${yyyy}.`;
   }
-});
+}
+
+// Calcular al cambiar la fecha
+formCanje?.elements["fecha_inicio_canje"]?.addEventListener("change", calcularPeriodo);
+
+// Calcular al pulsar el botón
+btnCalcularPeriodo?.addEventListener("click", calcularPeriodo);
 
 // Envío del formulario de canje
 formCanje?.addEventListener("submit", async (e) => {
@@ -120,7 +129,7 @@ formCanje?.addEventListener("submit", async (e) => {
     statusCanje.classList.add("ok");
     formCanje.reset();
     if (infoPeriodo) {
-      infoPeriodo.textContent = "El sistema calculará el período según el convenio del club.";
+      infoPeriodo.textContent = "Pulsa “Calcular período” o cambia la fecha de inicio.";
     }
   } catch (err) {
     console.error("Error al guardar canje:", err);

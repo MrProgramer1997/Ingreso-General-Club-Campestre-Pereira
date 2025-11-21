@@ -1,4 +1,7 @@
 // assets/js/invitados.js
+
+console.log("invitados.js cargado");
+
 const formInvitado = document.getElementById("formInvitado");
 const statusInvitado = document.getElementById("statusInvitado");
 const fechaNacimientoInput = formInvitado?.elements["fecha_nacimiento"];
@@ -16,7 +19,7 @@ function calcularEdad(fechaStr) {
   return edad >= 0 ? edad : "";
 }
 
-// Calcula edad al cambiar la fecha
+// Calcula edad al cambiar la fecha de nacimiento
 fechaNacimientoInput?.addEventListener("change", () => {
   const edad = calcularEdad(fechaNacimientoInput.value);
   edadInput.value = edad || "";

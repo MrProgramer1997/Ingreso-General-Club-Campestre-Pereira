@@ -19,6 +19,7 @@
   <main class="main-section">
     <a href="../index.html" class="btn ghost" style="margin-bottom:1rem;">← Volver al inicio</a>
 
+    <!-- VALIDACIÓN DE CLUB -->
     <section class="form-shell">
       <div class="form-header">
         <div class="form-header-badge">🤝</div>
@@ -33,7 +34,7 @@
           <div class="field">
             <label>ID del club emisor *</label>
             <input type="text" name="id_club" required autocomplete="off" placeholder="Ej: ARM-CC">
-            <small>Solicitud exclusiva para personal autorizado.</small>
+            <small>Pruebas: ARM-CC, BQA-CC, BGT-ARRAY, BGT-CC, MDL-CC, PNA-GOLF, SANT-RUITOQUE.</small>
           </div>
         </div>
         <div class="helper-row">
@@ -43,6 +44,7 @@
       </form>
     </section>
 
+    <!-- FORMULARIO DE CANJE -->
     <section class="form-shell" id="sectionCanje" style="display:none;">
       <div class="form-header">
         <div class="form-header-badge">📋</div>
@@ -133,13 +135,16 @@
           <div class="field">
             <label>Fecha fin canje (auto)</label>
             <input type="date" name="fecha_fin_canje" readonly>
-            <small id="infoPeriodo">El sistema calculará el período según el convenio del club.</small>
+            <small id="infoPeriodo">Pulsa “Calcular período” o cambia la fecha de inicio.</small>
           </div>
         </div>
 
         <div class="helper-row">
-          <div class="status" id="statusCanje">Completa los datos para guardar.</div>
+          <button type="button" class="btn secondary" id="btnCalcularPeriodo">Calcular período</button>
           <button type="submit" class="btn primary">Guardar canje</button>
+        </div>
+        <div class="helper-row">
+          <div class="status" id="statusCanje">Completa los datos para guardar.</div>
         </div>
       </form>
     </section>
@@ -149,7 +154,7 @@
     <span>Módulo 2 · Canjes entre clubes</span>
   </footer>
 
-  <script src="../assets/js/common.js"></script>
-  <script src="../assets/js/canjes.js"></script>
+  <script src="../assets/js/common.js?v=2"></script>
+  <script src="../assets/js/canjes.js?v=2"></script>
 </body>
 </html>
